@@ -13,8 +13,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-mongoose
-  .connect(process.env.MONGODB_URI)
+  mongoose
+  .connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 30000, // Increased the timeout value
+  })
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log(err));
 
